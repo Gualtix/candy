@@ -20,6 +20,7 @@ export class AppComponent {
   };
 
   ngOnInit(){
+    
     if (navigator.geolocation) {
       navigator.geolocation.watchPosition(position => {
         this.lat = position.coords.latitude;
