@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+.cnt{
+    width: 290px;
+    height: 450px;
+    border-radius: 10px;
+    border-style: solid;
+    margin: auto;
+    border-width: 3px;
+    border-color: blue;
+}
