@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AgmCoreModule }    from '@agm/core';
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -13,7 +14,8 @@ import { AgmCoreModule }    from '@agm/core';
     BrowserModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDSzaXvA5D65loGW47U6NIy2Yfq5QlNEvg'
+      apiKey: 'AIzaSyDSzaXvA5D65loGW47U6NIy2Yfq5QlNEvg',
+      libraries: ["places", "geometry"]
     })
   ],
   providers: [],

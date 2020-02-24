@@ -1,5 +1,16 @@
 <div class="cnt">
-  <agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng">
-    <agm-marker  [latitude]="lat" [longitude]="lng"></agm-marker>
+
+  <agm-map [latitude]="lucky.latitude" [longitude]="lucky.longitude"  [zoom]="lucky.zoom">
+    <agm-marker *ngFor="let marker of lucky.markers" [latitude]="marker.lat" [longitude]="marker.lng"></agm-marker>
   </agm-map>
+
+  <!--
+    <agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng">
+      <agm-marker  [latitude]="lat" [longitude]="lng"></agm-marker>
+
+    </agm-map>
+  -->
+
+  <br/>
+  <button (click)="addMaker()">Gordis</button>
 </div>
