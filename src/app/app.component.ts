@@ -22,14 +22,20 @@ export class AppComponent implements OnInit{
     maximumAge: 0
   };
 
+  constructor(){
+    this.addMaker();
+  }
+
  ngOnInit(){
 
-  //Don Jose 14.583848, -90.749083
+  this.addMaker();
 
+  //Don Jose 14.583848, -90.749083
+  /*
   this.lucky = {
     latitude:  14.589282,
     longitude: -90.551469,
-    mapType: "satelite",
+    mapType: "roadmap",
     zoom: 15,
     markers: [
       {
@@ -38,9 +44,7 @@ export class AppComponent implements OnInit{
       }
     ]
   };
-
-
-
+  */
  }
 
  addMaker(){
@@ -55,16 +59,15 @@ export class AppComponent implements OnInit{
       
       this.lucky.latitude = position.coords.latitude;
       this.lucky.longitude = position.coords.longitude;
+      this.lucky.mapType = "roadmap";
+      this.lucky.zoom = 15;
+
       this.lucky.markers.push(this.mkr);
 
     },error => {
 
     },this.options);
   }
-
-  //console.log(this.mkr);
-  
-
  }
 
   /*
