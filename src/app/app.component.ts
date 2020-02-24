@@ -16,6 +16,12 @@ export class AppComponent implements OnInit{
   lucky: Location;
   mkr:   Marker;
 
+  options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  };
+
  ngOnInit(){
 
   //Don Jose 14.583848, -90.749083
@@ -40,9 +46,8 @@ export class AppComponent implements OnInit{
  addMaker(){
 
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
+    navigator.geolocation.watchPosition(position => {
 
-      
       this.mkr = {
         lat: position.coords.latitude, 
         lng: position.coords.longitude
@@ -52,7 +57,9 @@ export class AppComponent implements OnInit{
       this.lucky.longitude = position.coords.longitude;
       this.lucky.markers.push(this.mkr);
 
-    });
+    },error => {
+
+    },this.options);
   }
 
   //console.log(this.mkr);
