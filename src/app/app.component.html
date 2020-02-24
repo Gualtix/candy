@@ -1,6 +1,11 @@
 <div class="cnt">
 
-  <agm-map [latitude]="lucky.latitude" [longitude]="lucky.longitude"  [zoom]="lucky.zoom">
+  <agm-map
+    [latitude]="lucky.latitude"
+    [longitude]="lucky.longitude"
+    [zoom]="lucky.zoom"
+    [styles]="lucky.styles"
+  >
     <agm-marker *ngFor="let marker of lucky.markers" [latitude]="marker.lat" [longitude]="marker.lng"></agm-marker>
   </agm-map>
 

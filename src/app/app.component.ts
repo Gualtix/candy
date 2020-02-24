@@ -11,6 +11,23 @@ declare var google: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+
+
+
+//Bienestar Estudiantil
+//lat: 14.587224
+//lng: -90.550755
+//
+
+//Facultad de Humanidades
+//lat: 14.586759
+//lng: -90.550799
+
+//Escuela de Ciencias de la Comunicacion
+//lat: 14.588404
+//lng: -90.549001
+
 export class AppComponent implements OnInit{
 
   lucky: Location;
@@ -22,33 +39,114 @@ export class AppComponent implements OnInit{
     maximumAge: 0
   };
 
+  EDList: Array<Edificio> = [];
+  
+  EDTemp: Edificio;
+  NVTemp: Nivel;
+  AUTemp: AreaUtilizable;
+
+  
+  initMap(){
+    this.lucky = {
+      latitude: 14.589274,
+      longitude: -90.551458,
+      mapType:"roadmap",
+      markers: [],
+      zoom:17,
+      styles:[
+        {
+          "elementType": "labels",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "administrative.land_parcel",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "administrative.neighborhood",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        }
+      ]
+    }
+  }
+  
+
+  
+
+
+  loadJS(){
+    this.NVTemp = {
+      nvid: 1,
+      Areas: []
+    }
+  
+    this.AUTemp = {
+      auid: "303",
+      descripcion: "CEDECYD"
+    }
+  
+    this.NVTemp.Areas.push(this.AUTemp);
+  
+    this.EDTemp = {
+      lat: 14.587224,
+      lng: -90.550755,
+      id: "BE",
+      nombre: "Bienestar Estudiantil",
+      Pisos: []
+    }
+  
+    this.EDTemp.Pisos.push(this.NVTemp);
+    this.EDList.push(this.EDTemp);
+  }
+
+  loadMarkers(){
+    for (let ed in this.EDList){
+      console.log(ed);
+      /*
+      this.lucky.markers.push({
+        lat:ed.lat,
+        lng:ed.lng
+      });
+      */
+    }
+  }
+
   constructor(){
-    this.addMaker();
+    //this.loadJS();
+    //this.addMaker();
   }
 
  ngOnInit(){
 
-  this.addMaker();
+  this.initMap();
+  this.loadJS();
+  this.loadMarkers();
 
-  //Don Jose 14.583848, -90.749083
-  /*
-  this.lucky = {
-    latitude:  14.589282,
-    longitude: -90.551469,
-    mapType: "roadmap",
-    zoom: 15,
-    markers: [
-      {
-          lat: 14.589282,
-          lng: -90.551469
-      }
-    ]
-  };
-  */
+
+  //console.log(this.EDTemp);
+
+  //this.addMaker();
+
+ }
+
+ loadLocs(){
+   
  }
 
  addMaker(){
-
+  /*
   if (navigator.geolocation) {
     navigator.geolocation.watchPosition(position => {
 
@@ -68,85 +166,34 @@ export class AppComponent implements OnInit{
 
     },this.options);
   }
+  */
  }
-
-  /*
-
-  location: Location;
-
-
-  title = 'candy';
-
-  lat: number    = 14.589282;
-  lng: number    = -90.551469; 
-  zoom: number   = 15;
-
-  markers: Array<Marker>;
-  
-  //markers: MyMarker[];
-  //map: AgmMap;
-
-  //AgmMap: google.maps.Map;
-
-
-  options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0
-  };
-
-
-  getpos(){
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
-        this.zoom = 16;
-        //console.log('hola');
-      },error => {
-
-      },this.options);
-    }
-  }
-
-  createMarker() {
-    
-
-    // list of hardcoded positions markers 
-    //14.587851, -90.551786
-    //14.589289, -90.552388
-     var myLatLngList = {
-         myLatLng : [{ lat: 14.587851, lng: -90.551786 }, { lat: 14.589289, lng: -90.552388 }]    
-         };
-
-        //iterate latLng and add markers 
-       for(const data of myLatLngList.myLatLng){
-         var marker = new google.maps.Marker({
-             position: data,
-             map: this.map,
-             title: 'markers'
-         });
-      }
-
-      
- };
-
-  ngOnInit(){
-    
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
-        this.zoom = 16;
-        console.log("Lat: "+this.lat);
-        console.log("Lat: "+this.lng);
-        //console.log('hola');
-      },error => {
-
-      },this.options);
-    }
-  }*/
+ 
 }
+
+
+
+interface Edificio{
+  lat: number,
+  lng: number,
+  id: string,
+  nombre: string,
+  Pisos: Array<Nivel>
+}
+
+interface Nivel{
+  nvid: number,
+  Areas: Array<AreaUtilizable>
+}
+
+interface AreaUtilizable{
+  auid: string,
+  descripcion: string
+}
+
+
+
+
 
 interface Marker {
   lat: number;
@@ -159,6 +206,6 @@ interface Location {
   mapType: string;
   zoom: number;
   markers: Array<Marker>;
+  styles: Array<any>;
 }
-
 
