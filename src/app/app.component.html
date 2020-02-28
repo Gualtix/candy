@@ -6,7 +6,12 @@
     [zoom]="lucky.zoom"
     [styles]="lucky.styles"
   >
-    <agm-marker *ngFor="let marker of lucky.markers" [latitude]="marker.lat" [longitude]="marker.lng"></agm-marker>
+    <agm-marker *ngFor="let marker of lucky.markers" 
+      [latitude]="marker.lat" 
+      [longitude]="marker.lng"
+      [iconUrl]="marker.icon"
+    >
+    </agm-marker>
   </agm-map>
 
   <!--

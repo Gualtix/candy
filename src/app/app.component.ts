@@ -31,7 +31,7 @@ declare var google: any;
 export class AppComponent implements OnInit{
 
   lucky: Location;
-  mkr:   Marker;
+  mkr_list:   Marker;
 
   options = {
     enableHighAccuracy: true,
@@ -39,11 +39,56 @@ export class AppComponent implements OnInit{
     maximumAge: 0
   };
 
+  remote_info = [
+    {
+      ed_id: "USAC",
+      nombre: "Universidad de San Carlos de Guatemala",
+      lat: 14.589274, 
+      lng: -90.551455,
+      divisiones: []
+    },
+    {
+      ed_id: "EBE",
+      nombre: "Edificio Bienestar Estudiantil",
+      lat: 14.587224,
+      lng: -90.550755,
+      divisiones: [
+        {
+          divi_id:"dbeu",
+          nombre: "Division de Bienestar Estudiantil Universitario",
+          ubicacion: "Edificio Bienestar Estudiantil 3r Nivel",
+          telefono: "2418 8000, Ext.: 83030",
+          email:"bienestaredusac@gmail.com",
+          contacto:"Alejandra Sori"
+        }
+      ]
+    },
+    {
+      ed_id: "ES4",
+      nombre: "Facultad de Humanidades",
+      lat: 14.586759,
+      lng: -90.550799, 
+      divisiones: [
+        {
+          divi_id:"psi",
+          nombre: "Departameto de Psicologia",
+          ubicacion: "Edificio S4 2do Nivel",
+          telefono: "2443 9500",
+          email:"sec.asignaciones@gmail.com",
+          contacto:"Joel Moriyama"
+        }
+      ]
+    }
+  ]
+
+
+  /*
   EDList: Array<Edificio> = [];
   
   EDTemp: Edificio;
   NVTemp: Nivel;
   AUTemp: AreaUtilizable;
+  */
 
   
   initMap(){
@@ -86,41 +131,43 @@ export class AppComponent implements OnInit{
   
 
 
-  loadJS(){
-    this.NVTemp = {
-      nvid: 1,
-      Areas: []
-    }
-  
-    this.AUTemp = {
-      auid: "303",
-      descripcion: "CEDECYD"
-    }
-  
-    this.NVTemp.Areas.push(this.AUTemp);
-  
-    this.EDTemp = {
-      lat: 14.587224,
-      lng: -90.550755,
-      id: "BE",
-      nombre: "Bienestar Estudiantil",
-      Pisos: []
-    }
-  
-    this.EDTemp.Pisos.push(this.NVTemp);
-    this.EDList.push(this.EDTemp);
-  }
+ 
 
   loadMarkers(){
-    for (let ed in this.EDList){
-      console.log(ed);
-      /*
-      this.lucky.markers.push({
-        lat:ed.lat,
-        lng:ed.lng
-      });
-      */
+
+    let i = 0;
+    let n = this.remote_info.length;
+
+    
+
+    while(i < n){
+      //console.log(this.remote_info[i]);
+      let tmp = this.remote_info[i];
+
+      var markerIcon = {
+        url: 'http://image.flaticon.com/icons/svg/252/252025.svg',
+        scaledSize: new google.maps.Size(80, 80),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(32,65)
+      };
+  
+      var markerLabel = 'GO!';
+
+      this.lucky.markers.push(
+          {
+            lat:tmp.lat,
+            lng:tmp.lng,
+            icon: markerIcon,
+            labelContent: markerLabel,
+            labelAnchor: new google.maps.Point(18, 12),
+            labelClass: "my-custom-class-for-label",
+            labelInBackground: true
+          }
+        );
+      i++;
     }
+
+    console.log(this.remote_info);
   }
 
   constructor(){
@@ -131,7 +178,7 @@ export class AppComponent implements OnInit{
  ngOnInit(){
 
   this.initMap();
-  this.loadJS();
+
   this.loadMarkers();
 
 
@@ -191,13 +238,14 @@ interface AreaUtilizable{
   descripcion: string
 }
 
-
-
-
-
 interface Marker {
   lat: number;
   lng: number;
+  icon: any;
+  labelContent: any;
+  labelAnchor: any;
+  labelClass: "my-custom-class-for-label";
+  labelInBackground: boolean;
 }
 
 interface Location {
