@@ -1,8 +1,9 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit,HostListener, } from '@angular/core';
 //import { google } from '@agm/core/services/google-maps-types';
 //import {} from '@types/googlemaps';
 //import {} from '@agm/core/services/google-maps-types'
 import { GoogleMapsAPIWrapper, AgmMap,AgmCoreModule } from '@agm/core';
+
 
 declare var google: any;
 
@@ -11,9 +12,6 @@ declare var google: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-
-
-
 
 //Bienestar Estudiantil
 //lat: 14.587224
@@ -29,6 +27,58 @@ declare var google: any;
 //lng: -90.549001
 
 export class AppComponent implements OnInit{
+
+  /*
+  deferredPrompt: any;
+  showButton = false;
+
+
+  @HostListener('window:beforeinstallprompt', ['$event'])
+  onbeforeinstallprompt(e) {
+    console.log(e);
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    this.deferredPrompt = e;
+    this.showButton = true;
+  }
+
+
+  addToHomeScreen() {
+    // hide our user interface that shows our A2HS button
+    this.showButton = false;
+    // Show the prompt
+    this.deferredPrompt.prompt();
+    // Wait for the user to respond to the prompt
+    this.deferredPrompt.userChoice
+      .then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the A2HS prompt');
+        } else {
+          console.log('User dismissed the A2HS prompt');
+        }
+        this.deferredPrompt = null;
+      });
+  }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   lucky: Location;
   mkr_list:   Marker;
@@ -127,18 +177,10 @@ export class AppComponent implements OnInit{
     }
   }
   
-
-  
-
-
- 
-
   loadMarkers(){
 
     let i = 0;
     let n = this.remote_info.length;
-
-    
 
     while(i < n){
       //console.log(this.remote_info[i]);

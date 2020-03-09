@@ -1,0 +1,15 @@
+{
+    "background_color": "purple",
+    "description": "Informacion en Timpor Real de los Edificios y Organizaciones",
+    "display": "fullscreen",
+    "icons": [
+      {
+        "src": "mapicon.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ],
+    "name": "Mapa Interactivo",
+    "short_name": "Ubisac",
+    "start_url": "https://gualtix.github.io/candy/index.html"
+  }
