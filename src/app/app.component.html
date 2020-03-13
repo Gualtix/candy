@@ -24,4 +24,5 @@
   <br/>
   <!-- <button (click)="addToHomeScreen()">Add to Home Scree</button> -->
   <!-- <button (click)="addMaker()">Gordis</button> -->
+  <button *ngIf="Pwa.promptEvent" (click)="installPwa()">Install</button>
 </div>

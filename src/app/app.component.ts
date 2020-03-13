@@ -5,6 +5,22 @@ import { Component, OnInit,HostListener, } from '@angular/core';
 import { GoogleMapsAPIWrapper, AgmMap,AgmCoreModule } from '@agm/core';
 
 
+import { Injectable } from '@angular/core';
+import { SwUpdate } from '@angular/service-worker';
+@Injectable()
+export class PwaService {
+  promptEvent:any;
+  constructor(private swUpdate: SwUpdate) {
+    /*
+    swUpdate.available.subscribe(event => {
+      if (askUserToUpdate()) {
+        window.location.reload();
+      }
+    });*/
+  }
+}
+
+
 declare var google: any;
 
 @Component({
@@ -27,6 +43,9 @@ declare var google: any;
 //lng: -90.549001
 
 export class AppComponent implements OnInit{
+
+  
+  promptEvent:any;
 
   /*
   deferredPrompt: any;
@@ -212,16 +231,29 @@ export class AppComponent implements OnInit{
     console.log(this.remote_info);
   }
 
-  constructor(){
+  constructor(public Pwa: PwaService){
     //this.loadJS();
     //this.addMaker();
+    window.addEventListener('beforeinstallprompt', event => {
+      this.promptEvent = event;
+    });
+
+    
   }
+
+  installPwa(): void {
+    this.Pwa.promptEvent.prompt();
+  }
+
+  
 
  ngOnInit(){
 
   this.initMap();
 
   this.loadMarkers();
+
+  
 
 
   //console.log(this.EDTemp);
